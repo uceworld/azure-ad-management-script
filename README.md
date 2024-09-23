@@ -35,6 +35,7 @@ Update the users based on the provided CSV file:
 ```powershell
 .\Update-AzureADUsers.ps1
 -CsvPath "C:\path\to\file.csv"
+```
 
 ## Example CSV File
 The CSV file should be structured as follows:
