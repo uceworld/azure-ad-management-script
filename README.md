@@ -22,7 +22,21 @@ To use this script, you need the following:
    ```
 2. Configure the CSV input file.
 
-# Example CSV File
+3. Run the script:
+   ```powershell
+   .\Update-AzureADUsers.ps1
+   ```
+4. Review the Logs:
+   After execution, logs will be saved to ```plaintextuser_update_log.txt``` and ```plaintextuser_update_error_log.txt``` in your specified directory.
+
+
+## Example
+Update the users based on the provided CSV file:
+```powershell
+.\Update-AzureADUsers.ps1
+-CsvPath "C:\path\to\file.csv"
+
+## Example CSV File
 The CSV file should be structured as follows:
 ```csv
 UserPrincipalName,JobTitle,Department,DisplayName,ManagerUPN
@@ -30,13 +44,12 @@ johndoe@company.com,Engineer,Engineering,John Doe,janedoe@company.com
 janedoe@company.com,Manager,Operations,Jane Doe,johndoe@company.com
 ```
 
-3. Run the script:
-   ```powershell
-   .\Update-AzureADUsers.ps1
-   ```
+## Error Handling
+- The script includes retry logic for up to 3 attempts in case of transient issues.
+- Errors encountered during execution are logged in the error log file for review.
 
-## Example
-Update the users based on the provided CSV file:
-```powershell
-.\Update-AzureADUsers.ps1
--CsvPath "C:\path\to\file.csv"
+## Contributions
+Contributions are welcome! Please see the Contributing Guidelines for more information.
+
+## License
+This project is licensed under the MIT License. See the LICENSE file for details.
