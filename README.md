@@ -21,6 +21,15 @@ To use this script, you need the following:
    git clone https://github.com/uceworld/azure-ad-management-script.git
    ```
 2. Configure the CSV input file.
+
+## Example CSV File
+The CSV file should be structured as follows:
+```csv
+UserPrincipalName,JobTitle,Department,DisplayName,ManagerUPN
+johndoe@company.com,Engineer,Engineering,John Doe,janedoe@company.com
+janedoe@company.com,Manager,Operations,Jane Doe,johndoe@company.com
+```
+
 3. Run the script:
    ```powershell
    .\Update-AzureADUsers.ps1
