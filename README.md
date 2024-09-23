@@ -54,7 +54,7 @@ janedoe@company.com,Manager,Operations,Jane Doe,johndoe@company.com
 - Errors encountered during execution are logged in the error log file for review.
 
 ## Contributions
-Contributions are welcome! Please see the Contributing Guidelines for more information.
+Contributions are welcome! Please see the [Contributing Guidelines](CONTRIBUTING.md) for more information.
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
