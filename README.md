@@ -27,7 +27,7 @@ To use this script, you need the following:
    .\Update-AzureADUsers.ps1
    ```
 4. Review the Logs:
-   After execution, logs will be saved to ```plaintextuser_update_log.txt``` and ```plaintextuser_update_error_log.txt``` in your specified directory.
+   After execution, logs will be saved to ```user_update_log.txt``` and ```user_update_error_log.txt``` in your specified directory.
 
 
 ## Example
