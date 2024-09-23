@@ -24,22 +24,22 @@ To use this script, you need the following:
 2. Prepare Your CSV File
    Use the sample CSV file (```users.csv```) in the repository to format your data.
 
-3.  Configure the CSV input file.
+3. On the first section of the script, replace ```C:\path\to\``` with the actual path to your users csv file.
+   For ```user_update_log.txt``` and ```user_update_error_log.txt```, choose a preferred path to replace their               ```C:\path\to\```, your preferred will determine where the logFile and erorrLogFile would be created.
+   ```powershell
+   # Path to the CSV file and log files
+   $csvPath = "C:\path\to\users.csv"
+   $logFilePath = "C:\path\to\user_update_log.txt"
+   $errorLogFilePath = "C:\path\to\user_update_error_log.txt"
+   ```
 
-4. Run the script:
+5. Run the script:
    ```powershell
    .\Update-AzureADUsers.ps1
    ```
-5. Review the Logs:
+6. Review the Logs:
    After execution, logs will be saved to ```user_update_log.txt``` and ```user_update_error_log.txt``` in your specified directory.
 
-
-## Example
-Update the users based on the provided CSV file:
-```powershell
-.\Update-AzureADUsers.ps1
--CsvPath "C:\path\to\file.csv"
-```
 
 ## Example CSV File
 The CSV file should be structured as follows:
