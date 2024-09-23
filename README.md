@@ -14,19 +14,23 @@ To use this script, you need the following:
 - Azure AD PowerShell Module installed:
    ```powershell
    Install-Module -Name AzureAD
+- Administrative access to Azure AD.
 
 ## How to Use
 1. Clone the repository:
    ```bash
    git clone https://github.com/uceworld/azure-ad-management-script.git
    ```
-2. Configure the CSV input file.
+2. Prepare Your CSV File
+   Use the sample CSV file (```users.csv```) in the repository to format your data.
 
-3. Run the script:
+3.  Configure the CSV input file.
+
+4. Run the script:
    ```powershell
    .\Update-AzureADUsers.ps1
    ```
-4. Review the Logs:
+5. Review the Logs:
    After execution, logs will be saved to ```user_update_log.txt``` and ```user_update_error_log.txt``` in your specified directory.
 
 
