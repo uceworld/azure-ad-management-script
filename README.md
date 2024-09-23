@@ -22,7 +22,7 @@ To use this script, you need the following:
    ```
 2. Configure the CSV input file.
 
-## Example CSV File
+# Example CSV File
 The CSV file should be structured as follows:
 ```csv
 UserPrincipalName,JobTitle,Department,DisplayName,ManagerUPN
