@@ -1,0 +1,3 @@
+UserPrincipalName,JobTitle,Department,DisplayName,ManagerUPN
+johndoe@company.com,Engineer,Engineering,John Doe,janedoe@company.com
+janedoe@company.com,Manager,Operations,Jane Doe,johndoe@company.com
