@@ -1,6 +1,9 @@
-# Azure AD User Management Automation Script
+# Microsoft Entra ID (Microsoft Graph) User Management Automation Script
 
-This repository contains a PowerShell script that automates the process of updating user properties in Azure Active Directory (Azure AD) from a CSV file. It handles updating job titles, departments, display names, and manager assignments, along with comprehensive logging and error handling.
+This repository contains a PowerShell script that automates the process of updating user properties in **Microsoft Entra ID** (formerly Azure Active Directory) using the **Microsoft Graph PowerShell SDK**. It handles updating job titles, departments, display names, and manager assignments, along with comprehensive logging and error handling.
+
+> ⚠️ **Note**: This script replaces older implementations using the now-deprecated `AzureAD` module. It fully supports the modern `Microsoft.Graph` SDK.
+
 
 ## Key Features
 - **Bulk User Updates**: Efficiently updates job title, department, and display name for users.
@@ -11,10 +14,12 @@ This repository contains a PowerShell script that automates the process of updat
 ## Prerequisites
 To use this script, you need the following:
 - PowerShell 5.1 or later.
-- Azure AD PowerShell Module installed:
+- Microsoft Graph PowerShell SDK installed:
    ```powershell
-   Install-Module -Name AzureAD
-- Administrative access to Azure AD.
+   Install-Module Microsoft.Graph -Scope CurrentUser -Repository PSGallery -Force
+- Administrative access to Microsoft Entra ID.
+- Admin consent to the following Graph API scopes:
+  `User.ReadWrite.All`,`Group.ReadWrite.All`
 
 ## How to Use
 1. Clone the repository:
@@ -52,6 +57,19 @@ janedoe@company.com,Manager,Operations,Jane Doe,johndoe@company.com
 ## Error Handling
 - The script includes retry logic for up to 3 attempts in case of transient issues.
 - Errors encountered during execution are logged in the error log file for review.
+
+## Migration from AzureAD to Microsoft.Graph
+
+This script modernizes the approach by replacing deprecated AzureAD cmdlets with Microsoft.Graph equivalents:
+
+| AzureAD Cmdlet         | Microsoft Graph Equivalent     |
+|------------------------|--------------------------------|
+| `Connect-AzureAD`      | `Connect-MgGraph`              |
+| `Get-AzureADUser`      | `Get-MgUser`                   |
+| `Set-AzureADUser`      | `Update-MgUser`                |
+| `Set-AzureADUserManager` | `Set-MgUserManagerByRef`     |
+
+> ℹ️ For more details, refer to the [Upgrade from Azure AD PowerShell to Microsoft Graph PowerShell documentation](https://learn.microsoft.com/en-us/powershell/microsoftgraph/migration-steps?view=graph-powershell-1.0).
 
 ## Contributions
 Contributions are welcome! Please see the [Contributing Guidelines](CONTRIBUTING.md) for more information.
