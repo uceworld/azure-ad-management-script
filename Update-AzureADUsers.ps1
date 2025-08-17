@@ -52,13 +52,13 @@ function Validate-Csv {
     return $true
 }
 
-# Check if an AzureAD session is active, if not, prompt for login
+# Check if an EntraID session is active, if not, prompt for login
 try {
-    Get-AzureADUser -Top 1 -ErrorAction Stop
-    Write-Log "AzureAD session is active." "INFO"
+    Get-MgContext -ErrorAction Stop
+    Write-Log "EntraID session is active." "INFO"
 } catch {
-    Write-Log "No active AzureAD session found. Initiating login..." "INFO"
-    Connect-AzureAD
+    Write-Log "No active EntraID session found. Initiating login..." "INFO"
+    Connect-MgGraph -Scopes "User.ReadWrite.All", "Group.ReadWrite.All"
 }
 
 # Import users from CSV and validate data
@@ -92,7 +92,7 @@ foreach ($user in $users) {
     $success = $false
     while ($attempt -lt $retryCount -and -not $success) {
         try {
-            Set-AzureADUser -ObjectId $user.$UserPrincipalNameAttr -JobTitle $user.$JobTitleAttr -Department $user.$DepartmentAttr -DisplayName $user.$DisplayNameAttr
+            Update-MgUser -UserId $user.$UserPrincipalNameAttr -JobTitle $user.$JobTitleAttr -Department $user.$DepartmentAttr -DisplayName $user.$DisplayNameAttr
             Write-Log "Successfully updated user properties for $($user.$UserPrincipalNameAttr)" "SUCCESS"
             $successfulUpdates++
             $success = $true
@@ -111,7 +111,8 @@ foreach ($user in $users) {
     # Skip manager update if manager does not exist
     if ($user.$ManagerUPNAttr) {
         try {
-            $manager = Get-AzureADUser -ObjectId $user.$ManagerUPNAttr -ErrorAction Stop
+            # Get manager user object
+            $manager = Get-MgUser -UserId $user.$ManagerUPNAttr -ErrorAction Stop
         } catch {
             # Manager does not exist, log and skip
             Write-Log "Manager UPN $($user.$ManagerUPNAttr) not found for user $($user.$UserPrincipalNameAttr). Skipping manager update." "WARNING" "error"
@@ -119,11 +120,14 @@ foreach ($user in $users) {
             continue  # Skip to the next user
         }
 
+        # Construct OData ID
+        $odataId = "https://graph.microsoft.com/v1.0/users/$($manager.Id)"
+
         $attempt = 0
         $success = $false
         while ($attempt -lt $retryCount -and -not $success) {
             try {
-                Set-AzureADUserManager -ObjectId $user.$UserPrincipalNameAttr -RefObjectId $manager.ObjectId
+                Set-MgUserManagerByRef -UserId $user.$UserPrincipalNameAttr -OdataId $odataId
                 Write-Log "Successfully updated manager for $($user.$UserPrincipalNameAttr)" "SUCCESS"
                 $success = $true
             } catch {
@@ -138,6 +142,7 @@ foreach ($user in $users) {
             }
         }
     }
+
 }
 
 # Final report
