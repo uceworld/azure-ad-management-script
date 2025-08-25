@@ -1,6 +1,6 @@
 # Path to the CSV file and log files
 $csvPath = "C:\path\to\users.csv"
-$logFilePath = "C\path\to\user_update_log.txt"
+$logFilePath = "C:\path\to\user_update_log.txt"
 $errorLogFilePath = "C:\path\to\user_update_error_log.txt"
 
 # Define the attribute mappings
